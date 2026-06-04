@@ -1,0 +1,15 @@
+# Build artifacts
+*.o
+*.o.tmp
+TCP_Receiver
+TCP_Sender
+RUDP_Receiver
+RUDP_Sender
+
+# Debug files
+*.dSYM/
+
+# Editor and OS files
+.DS_Store
+.vscode/
+.idea/

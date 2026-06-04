@@ -2,7 +2,20 @@ CC=gcc
 CFLAGS=-Wall -g
 LDFLAGS=
 
-all: TCP_Receiver TCP_Sender RUDP_Receiver RUDP_Sender
+UNAME_S := $(shell uname -s)
+
+RUDP_TARGETS=RUDP_Receiver RUDP_Sender
+TCP_TARGETS=TCP_Receiver TCP_Sender
+
+ifeq ($(UNAME_S),Linux)
+all: $(TCP_TARGETS) $(RUDP_TARGETS)
+else
+all: $(RUDP_TARGETS)
+endif
+
+rudp: $(RUDP_TARGETS)
+
+tcp: $(TCP_TARGETS)
 
 TCP_Sender: TCP_Sender.o
 	$(CC) $(LDFLAGS) -o TCP_Sender TCP_Sender.o
@@ -32,4 +45,6 @@ RUDP_API.o: RUDP_API.c RUDP_API.h
 	$(CC) $(CFLAGS) -c RUDP_API.c
 
 clean:
-	rm -f *.o TCP_Receiver TCP_Sender RUDP_Receiver RUDP_Sender
+	rm -f *.o *.o.tmp TCP_Receiver TCP_Sender RUDP_Receiver RUDP_Sender
+
+.PHONY: all rudp tcp clean

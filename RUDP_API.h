@@ -1,9 +1,3 @@
-/**
- * 337614747
- * 315173633
-*/
-
-
 #ifndef RUDP_API_H
 #define RUDP_API_H
 
